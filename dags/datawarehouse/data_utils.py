@@ -25,12 +25,12 @@ def create_schema(schema):
     close_conn_cursor(conn, cur)
 
 
-def create_table(chema):
+def create_table(schema):
     conn, cur = get_conn_cursor()
     if schema == 'staging':
         table_sql = f""" 
             CREATE TABLE IF NOT EXISTS {schema}.{table} (
-                "Video_ID" VAECHAR(11) PRIMARY KET NOT NULL,
+                "Video_ID" VARCHAR(11) PRIMARY KEY NOT NULL,
                 "Video_Title" TEXT NOT NULL,
                 "Upload_Date" TIMESTAMP NOT NULL,
                 "Duration" VARCHAR(20) NOT NULL,
@@ -42,7 +42,7 @@ def create_table(chema):
     else:
         table_sql = f""" 
                 CREATE TABLE IF NOT EXISTS {schema}.{table} (
-                    "Video_ID" VAECHAR(11) PRIMARY KET NOT NULL,
+                    "Video_ID" VARCHAR(11) PRIMARY KEY NOT NULL,
                     "Video_Title" TEXT NOT NULL,
                     "Upload_Date" TIMESTAMP NOT NULL,
                     "Duration" TIME NOT NULL,
@@ -58,7 +58,7 @@ def create_table(chema):
 
 
 def get_video_ids(cur, schema):
-    cur.execute(f"""SLEECT "Video_ID" FROM {schema}.{table};""")
+    cur.execute(f"""SELECT "Video_ID" FROM {schema}.{table};""")
     ids = cur.fetchall()
     video_ids = [row["Video_ID"] for row in ids]
     return video_ids

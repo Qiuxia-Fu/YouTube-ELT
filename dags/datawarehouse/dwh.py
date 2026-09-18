@@ -1,11 +1,13 @@
 # build the main function to poplulate to staging and core layer
-from datawarehouse.data_utils import get_conn_cursor, close_conn_cursor, create_schema, create_table, get_video_ids
+from airflow.decorators import task
+from datawarehouse.data_utils import get_conn_cursor, close_conn_cursor, create_schema, create_table, get_video_ids, table
 from datawarehouse.data_loading import load_data
 from datawarehouse.data_modification import insert_rows, update_rows, delete_rows
 from datawarehouse.data_transformation import transform_data
 
 import logging
-from airflow.decorators import task
+
+logger = logging.getLogger(__name__)
 
 
 @task
@@ -61,7 +63,7 @@ def core_table():
 
     try:
 
-        conn, cur = get_conn_cursor
+        conn, cur = get_conn_cursor()
 
         create_schema(schema)
         create_table(schema)
@@ -70,8 +72,8 @@ def core_table():
 
         current_video_ids = set()
 
-        cur.execute(f"SELECT * FROM staging.(table);")
-        rows = fetchall()
+        cur.execute(f"SELECT * FROM staging.{table};")
+        rows = cur.fetchall()
 
         for row in rows:
             current_video_ids.add(row["Video_ID"])

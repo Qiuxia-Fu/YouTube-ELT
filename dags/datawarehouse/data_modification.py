@@ -10,7 +10,7 @@ def insert_rows(cur, conn, schema, row):
             video_id = 'video_id'
 
             cur.execute(
-                f"""INSERT INYO {schema}.{table}("Video_ID", "Video_Title", "Upload_Date", "Duration", "Video_Type", "Video_Views", "Likes_Count", "Comments_Count")
+                f"""INSERT INTO {schema}.{table}("Video_ID", "Video_Title", "Upload_Date", "Duration", "Video_Views", "Likes_Count", "Comments_Count")
                 VALUES (%(video_id)s, %(title)s, %(publishedAt)s, %(duration)s, %(viewCount)s, %(likeCount)s, %(commentCount)s);
                 """, row)
 
@@ -19,7 +19,7 @@ def insert_rows(cur, conn, schema, row):
 
             cur.execute(
                 f"""INSERT INTO {schema}.{table}("Video_ID", "Video_Title", "Upload_Date", "Duration", "Video_Type", "Video_Views", "Likes_Count", "Comments_Count")
-                VALUES (%(Video_ID)s, %(Video_Title)s, %(Upload_Date)s, %(Duration)s, %(View_Type)s, %(Video_Views)s, %(Likes_Count)s, %(Comments_Count)s);
+                VALUES (%(Video_ID)s, %(Video_Title)s, %(Upload_Date)s, %(Duration)s, %(Video_Type)s, %(Video_Views)s, %(Likes_Count)s, %(Comments_Count)s);
                 """, row,
             )
 
@@ -39,7 +39,7 @@ def update_rows(cur, conn, schema, row):
             upload_date = 'publishedAt'
             video_title = 'title'
             video_views = 'viewCount'
-            lieks_count = 'likeCount'
+            likes_count = 'likeCount'
             comments_count = 'commentCount'
         # core
         else:
@@ -57,7 +57,7 @@ def update_rows(cur, conn, schema, row):
                 "Video_Views" = %({video_views})s,
                 "Likes_Count" = %({likes_count})s,
                 "Comments_Count" = %({comments_count})s
-            WHERE "Video_ID" = %({video_id})s AND "Upload_Date" + %({upload_date})s;
+            WHERE "Video_ID" = %({video_id})s AND "Upload_Date" = %({upload_date})s;
             """, row,)
 
         conn.commit()
