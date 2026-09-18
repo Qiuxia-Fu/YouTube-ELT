@@ -15,7 +15,7 @@ def staging_table():
     conn, cur = None, None  # initializing conn and cur
 
     try:
-        conn, cur = get_conn_cursor
+        conn, cur = get_conn_cursor()
         YT_data = load_data()
 
         create_schema(schema)
@@ -47,7 +47,7 @@ def staging_table():
         raise e
 
     finally:
-        if conn, cur:
+        if conn and cur:
             close_conn_cursor(conn, cur)
 
 # ------staging completed
