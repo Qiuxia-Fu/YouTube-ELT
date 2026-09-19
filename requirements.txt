@@ -1,2 +1,5 @@
 soda-core-postgres==3.3.14
 pytest==8.3.2
+
+#unit test: individual parts of code, python functions work in isolation, using mock credentials(isolate unit from dependencies like databases and APIs)
+
