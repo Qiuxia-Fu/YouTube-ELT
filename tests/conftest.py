@@ -73,3 +73,5 @@ def real_postgres_connection():
     finally:
         if conn:
             conn.close()
+
+# -------------E2E test for a dag
