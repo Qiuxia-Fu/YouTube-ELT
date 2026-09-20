@@ -108,16 +108,6 @@ YouTube-ELT/
 └── docker-compose.yaml
 ```
 
-## Running Locally
-
-```bash
-git clone https://github.com/Qiuxia-Fu/YouTube-ELT.git
-cd YouTube-ELT
-docker compose up -d
-```
-
-This spins up Postgres, Redis, and the Airflow webserver/scheduler/worker. Once healthy, trigger the `produce_json` DAG from the Airflow UI (`localhost:8080`) to run the full pipeline end-to-end.
-
 ## Acknowledgements
 
 Built while completing [Start Your Data Engineering Journey](https://www.udemy.com/course/start-your-data-engineering-journey-project-based-learning/) on Udemy, extended with my own debugging, testing and CI/CD setup along the way.
